@@ -1,4 +1,5 @@
 ---
+# Check if code is properly tested and linted.
 name: Checks
  
 on: [push]
