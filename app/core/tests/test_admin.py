@@ -1,5 +1,12 @@
 """
 Test for the Django admin modifications.
+Unit test suite for checking Django admin interface for users is working
+properly.
+
+Unit tests
+1. if users show up in the Django Admin list page.
+2. if the edit user page loads correctly
+3. if the create user page loads correctly.
 """
 
 from django.test import TestCase
@@ -32,3 +39,17 @@ class AdminSiteTests(TestCase):
 
     self.assertContains(res, self.user.name)
     self.assertContains(res, self.user.email)
+
+  def test_edit_user_page(self):
+    """Test the edit user page works."""
+    url = reverse('admin:core_user_change', args=[self.user.id])
+    res = self.client.get(url)
+
+    self.assertEqual(res.status_code,200)
+
+  def test_create_user_page(self):
+    """Test the create user page works."""
+    url = reverse('admin:core_user_add')
+    res = self.client.get(url)
+
+    self.assertEqual(res.status_code,200)
